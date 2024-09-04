@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Freelance</title> -->
+    <title>In-Progress</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        body.dark-theme {
+            background-color: #000000;
+            color: #ccc;
+        }
+
+        body.bright-theme {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .locked-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('locked-bg.jpg'); /* Replace with your locked section background image */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            position: relative;
+        }
+
+        .locked-section .lock-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .dp-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .dp-container img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background-color: #e69500;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button id="theme-toggle" class="theme-toggle">Theme</button>
+    </header>
+
+    <div class="locked-section">
+        <div class="lock-icon">🔒</div> <!-- Lock icon -->
+        <p>Thank you for showing interest.<br>Unfortunately, this section hasn't started yet.</p>
+    </div>
+
+    <div class="dp-container">
+        <img src="IMG 2.gif" alt="Profile Picture"> <!-- Replace with your profile image -->
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const isDarkTheme = body.classList.contains('dark-theme');
+            if (isDarkTheme) {
+                body.classList.remove('dark-theme');
+                body.classList.add('bright-theme');
+                localStorage.setItem('theme', 'bright-theme');
+            } else {
+                body.classList.remove('bright-theme');
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark-theme');
+            }
+        }
+
+        function setTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+            } else {
+                document.body.classList.add('bright-theme'); // Default to bright theme
+            }
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+        setTheme();
+    </script>
+</body>
+</html>

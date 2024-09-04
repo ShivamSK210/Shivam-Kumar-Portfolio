@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        body.dark-theme {
+            background-color: #000000;
+            color: #ccc;
+        }
+
+        body.bright-theme {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding-top: 0px;
+            background-color: inherit;
+        }
+
+        .profile-cover {
+            width: 100%;
+            height: 94vh; /* Adjusted height */
+            background-image: url('IMG 5.jpg'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            /* margin-bottom: 10px; Space below the cover image */
+        }
+
+        .projects-container {
+            /* margin-top: 50px; */
+            width: 80%;
+            max-width: 1200px;
+            text-align: left;
+            margin-top: -15px; /* Reduced space between cover photo and title */
+        }
+
+        .projects-header {
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+
+        .project-header {
+            cursor: pointer;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: inherit;
+            width: auto;
+            margin-bottom: 30px;
+            text-align: justify-content;
+        }
+
+        .project-header:hover {
+            background-color: #f0f0f0;
+        }
+
+        .project-content {
+            display: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-left: 3px solid #333;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            text-align: justify-content;
+        }
+
+        .project-content.show {
+            display: block;
+            overflow: hidden;
+        }
+
+        .project-content.show p {
+            animation: slide-in 0.5s ease-out forwards;
+            display: inline-block;
+            transform: translateX(-100%);
+            opacity: 0;
+            text-align: justify-content;
+        }
+
+        @keyframes slide-in {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(44, 38, 38, 0.041);
+        }
+
+        .scroll-to-top:hover {
+            background-color: #333;
+        }
+
+        .scroll-to-top::before {
+            content: '^';
+            font-weight: bold;
+        }
+
+        header {
+            position: relative;
+        }
+
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 0 0 0 10px;
+            z-index: 1000;
+        }
+
+        .sticky-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sticky-nav ul li {
+            margin: 0 10px;
+        }
+
+        .sticky-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sticky-nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .home-tab {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .home-tab:hover {
+            background-color: #4a148c;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            left: 130px;
+            background-color: #808080;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background-color: #606060;
+            transform: scale(1.05);
+        }
+
+        .project-companies {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: -20px; /* Adjust spacing if needed */
+        }
+
+        .project-companies img {
+            width: 100px; /* Increased size from 50px to 80px */
+            height: auto;
+            margin-left: 10px;
+        }
+
+        /* Copyright Footer */
+        .copyright-footer {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to right, #2c3e50, #3498db); /* Blue gradient background */
+            color: white;
+            text-align: center;
+            position: relative;
+            font-size: 14px;
+        }
+               
+    </style>
+</head>
+<body>
+    <header>
+        <button id="theme-toggle" class="theme-toggle">Theme</button>
+        <button id="home-tab" class="home-tab">Home</button>
+        <nav class="sticky-nav">
+            <ul>
+                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <!-- <li><a href="others.html">Others</a></li>
+                <li><a href="contact.html">Contact</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="profile-container">
+        <div class="profile-cover"></div>
+        <div class="projects-container">
+            <div class="projects-header"><h1>Projects ⏬</h1></div>
+            <p style="text-align: justify;"><b><i>Managed and executed network services for three diverse projects, overcoming unique challenges and meeting specific client requirements.</b></i></p>
+
+            <div class="project-header" onclick="toggleProject(1)">Project 3</div>
+            <div id="project-content-1" class="project-content show">
+                <p style="text-align: justify;">A leading international grocery retail organization, operating a portfolio of well-known local brands across Europe, United States, etc. This company focuses on delivering fresh, high-quality food and innovative shopping experiences both in-store and online. It is committed to sustainability, digital transformation, and community well-being, aiming to provide customers with healthy and affordable food choices.</p>
+                <div class="project-companies">
+                    <!-- <img src="IMG 8.png" alt="Company Logo"> -->
+                </div>
+            </div>
+
+            <div class="project-header" onclick="toggleProject(2)">Project 2</div>
+            <div id="project-content-2" class="project-content">
+                <p style="text-align: justify;">Project 2 is a leading provider of retail operations support, technology, and innovation for grocery and retail companies. They offer comprehensive services, including IT solutions, supply chain management, financial services, and marketing strategies, to enhance the efficiency and growth of retail brands. They are dedicated to delivering seamless retail experiences through cutting-edge technology and strategic expertise.</p>
+                <div class="project-companies">
+                    <!-- <img src="IMG 7.webp" alt="Company Logo"> -->
+                </div>
+            </div>
+
+            <div class="project-header" onclick="toggleProject(3)">Project 1</div>
+            <div id="project-content-3" class="project-content">
+                <p style="text-align: justify;">Project 1 belongs to the company which is one of the world’s largest food and beverage companies, their products enjoyed by consumers more than one billion times a day in more than 200 countries around the world. They are committed to delivering innovation, improving health and wellness through its products, and promoting sustainability across its global operations.</p>
+                <div class="project-companies">
+                    <!-- <img src="IMG 6.png" alt="Company Logo"> -->
+                </div>
+            </div>
+
+            <div class="project-header" onclick="toggleProject(4)">Other Projects</div>
+            <div id="project-content-4" class="project-content">
+                
+                <p><h3>• File System Organizer (F.S.O)</h3></br>
+                    The FSO is used to manage the Un-Sorted files in an organized way.</br>
+                    Platform -> Node.JS</br>
+                    Programming Language -> JS</br>  
+                </p>
+
+                <p><h3>• Gesture control Robot</h3></br>
+                    Robot which can be controlled by hand gestures with a small transmitting device, which included an acceleration meter to transmit an appropriate command to the robot.</br>
+                    Software used -> Arduino IDE</br>
+                    Technology used -> Internet of Things (IOT)</br>
+                    Programming Language -> C</br>
+                    Research Paper Published.</br>
+                </p>
+                
+                <p><h3>• 28 GHZ, Microstrip Patch Antenna for 5G Applications</h3></br>
+                    Compared with conventional antennas, microstrip patch antennas have more
+                    advantages and better prospects.</br>
+                    By the end of 2021, 5G is anticipated to provide higher internet speeds, reduced latency, and increased capacity for data networks, emerging as a key market trend.</br>
+                    Software used -> HFSS 15</br>
+                    Research Paper Published.</br>
+                </p>
+                
+                <p><h3>• Others</h3>
+                    ≫ Security system using Password based, Access Control System (ACS).</br>
+                    ≫ Electronic Voting Machine (EVM).</br>
+                    ≫ Instrumentation Amplifier for K type Termocouple.</br>
+                </p>
+
+            </div>
+        </div>
+        <div class="scroll-to-top" onclick="scrollToTop()"></div>
+
+        <!-- <footer class="copyright-footer">
+            © Shivam Kumar, 2022
+        </footer> -->
+        
+    </section>
+
+    <script>
+        function toggleProject(projectNumber) {
+            const projectContent = document.getElementById(`project-content-${projectNumber}`);
+            projectContent.classList.toggle('show');
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const isDarkTheme = body.classList.contains('dark-theme');
+            if (isDarkTheme) {
+                body.classList.remove('dark-theme');
+                body.classList.add('bright-theme');
+                localStorage.setItem('theme', 'bright-theme');
+            } else {
+                body.classList.remove('bright-theme');
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark-theme');
+            }
+        }
+
+        function setTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+            } else {
+                document.body.classList.add('dark-theme');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('home-tab').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        setTheme();
+        
+    </script>
+</body>
+</html>

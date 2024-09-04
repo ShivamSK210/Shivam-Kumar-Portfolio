@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <button id="theme-toggle" class="theme-toggle">Theme</button>
+        <button id="home-tab" class="home-tab">Home</button>
+        <nav class="sticky-nav">
+            <ul>
+                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <!-- <li><a href="others.html">Others</a></li>
+                <li><a href="contact.html">Contact</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="landing-page">
+        <div id="particles-js"></div>
+        <h1>Welcome to My Portfolio</h1>
+        <h2 data-text="Dynamic Text">Shivam Kumar</h2>
+        <h3>Network | Security | Programming</h3>
+        <div class="section-icons">
+            <a href="https://www.linkedin.com/in/shivam-kumar-b430841b5/" target="_blank">
+                <i class="fab fa-linkedin"></i>
+                <span class="icon-label">LinkedIn</span>
+            </a>
+            <a href="https://drive.google.com/yourresume" target="_blank">
+                <i class="fas fa-file-pdf"></i>
+                <span class="icon-label">Resume</span>
+            </a>
+            <a href="#" onclick="copyEmail()">
+                <i class="fas fa-envelope"></i>
+                <span class="icon-label">Copy Email</span>
+            </a>
+                    <!-- #FreeLance -->
+            <!-- <a href="Freelance.html " target="_blank">
+                <i class="fas fa-briefcase"></i>
+                <span class="icon-label">Section not started yet.</span>
+            </a> -->
+        </div>
+    </section>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        body.dark-theme {
+            background-color: #000000; /* Black background for dark theme */
+            color: #ccc;
+        }
+
+        body.bright-theme {
+            background-color: #ffffff; /* White background for bright theme */
+            color: #000000;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            padding-top: 0px;
+            background-color: inherit; /* Inherit the background color from body */
+        }
+
+        .profile-cover {
+            width: 100%;
+            height: 91vh; /* Height for the profile cover */
+            background-image: url('IMG 3.webp'); /* Background image */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .skills-container {
+            /* margin-top: 50px; */
+            width: 80%;
+            max-width: 1200px;
+            text-align: left;
+        }
+
+        .skill-header h1 {
+            margin-bottom: 60px;
+        }
+
+        .skill-header {
+            cursor: pointer;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: inherit; /* No background by default */
+            width: auto;
+            margin-bottom: 30px;
+        }
+
+        .skill-header:hover {
+            background-color: #f0f0f0; /* Slight background change on hover */
+        }
+
+        /* Align skill headers left and right */
+        .skill-header:nth-child(4n+1), .skill-header:nth-child(4n+2) {
+            text-align: left;
+        }
+
+        .skill-header:nth-child(4n+3), .skill-header:nth-child(4n+4) {
+            text-align: right;
+        }
+
+        .skills-header {
+            font-size: 18px;
+            /* font-weight: bold; */
+            margin-bottom: 50px; /* Space below "Skills & Certifications" */
+            /* text-align: center; */
+            /* cursor: pointer; */
+        }
+        
+        /* Copyright Footer */
+        .copyright-footer {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(to right, #2c3e50, #3498db); /* Blue gradient background */
+            color: white;
+            text-align: center;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .skill-content {
+            display: none;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-left: 3px solid #333; /* Simple border for the skill content */
+            margin-top: 20px;
+            margin-bottom: 40px;
+            font-size: 1.1em; /* Increase the size of skill points */
+        }
+
+        .skill-content.show {
+            display: block;
+            overflow: hidden; /* Prevent overflow during animation */
+        }
+
+        .skill-content.show p {
+            animation: slide-in 0.5s ease-out forwards; /* Apply the animation */
+            display: inline-block;
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        /* Keyframes for slide-in effect */
+        @keyframes slide-in {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(44, 38, 38, 0.041);
+        }
+
+        .scroll-to-top:hover {
+            background-color: #333;
+        }
+
+        .scroll-to-top::before {
+            content: '^';
+            font-weight: bold;
+        }
+
+        header {
+            position: relative;
+        }
+
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 0 0 0 10px;
+            z-index: 1000;
+        }
+
+        .sticky-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sticky-nav ul li {
+            margin: 0 10px;
+        }
+
+        .sticky-nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sticky-nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .home-tab {
+            position: fixed;
+            top: 10px;
+            left: 10px; /* Positioned on the left side */
+            background-color: #6a1b9a; /* Purple background */
+            color: white;
+            border: none;
+            padding: 10px 20px; /* Slightly larger padding for better visibility */
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .home-tab:hover {
+            background-color: #4a148c; /* Darker purple on hover */
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 10px;
+            left: 130px; /* Increased space from home-tab */
+            background-color: #808080; /* Gray background in dark mode */
+            color: white;
+            border: none;
+            padding: 5px 15px; /* Adjusted padding */
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background-color: #606060; /* Darker gray on hover */
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button id="theme-toggle" class="theme-toggle">Theme</button>
+        <button id="home-tab" class="home-tab">Home</button>
+        <nav class="sticky-nav">
+            <ul>
+                <li><a href="about-me.html">About Me</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <!-- <li><a href="others.html">Others</a></li>
+                <li><a href="contact.html">Contact</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="profile-container">
+        <div class="profile-cover"></div>
+        <div class="skills-container">
+            <div class="skills-header"><h1>Skills & Certifications</h1></div>
+            <div class="skill-header" onclick="toggleSkill(1)">Network</div>
+            <div id="skill-content-1" class="skill-content show">
+                <p style="text-align: justify;"><b>•  Wireless: </b>IEEE 802.11 a/b/g/n/ac/ax/r/k/v/i/p/w standards, 802.11 auth, L2 / L3 Authentications, EAP’s, Guest Auth, Roaming, AP modes, CAPWAP, AP Join, HA, Mesh AP’s, Rogue AP’s, Firmware upgrade, Web Auth upgrade, OEAP. </br>
+                    <b>• Routing: </b>Proficient in routing protocols like static, default, dynamic (RIP, EIGRP, OSPF, BGP). IP routing & MPLS. GRE, DMVPN, IPSEC, Crypto Sessions. IP SLA, route redistribution, route summarization, and policy-based routing.</br>
+                    <b>• Switching:  </b>Experienced in implementing and troubleshooting Layer 2 and Layer 3 switching technologies, including VLAN configuration, Spanning tree protocol (STP), and Virtual trunking protocol (VTP). DAI, Ether Channel, IP Pools/ DHCP, Port security, Switch Stacking.</br> 
+                    <b>• Firewall: </b>FortiGate Firewall, Routing, SDWAN, NAT / PAT, ECMP, VPN, Authentications, PBR, IP Pools.</br>
+                </p>
+            </div>
+
+            <div class="skill-header" onclick="toggleSkill(2)">Security</div>
+            <div id="skill-content-2" class="skill-content">
+                <p style="text-align: justify;"><b>•</b> Gained foundational skills in cybersecurity through internal audits and company-wide awareness initiatives, including vulnerability assessments and security awareness training.</br>
+                    <b>•</b> Proficient in ethical hacking practices, with hands-on in identifying vulnerabilities across various platforms, including wireless networks. Skilled in generating effective payloads. Knowledgeable in reconnaissance, network mapping, port scanning, vulnerability scanning, gaining and maintaining access, clearing tracks, and reporting findings.</br>
+                </p>
+            </div>
+
+            <div class="skill-header" onclick="toggleSkill(3)">Languages</div>
+            <div id="skill-content-3" class="skill-content">
+                <p>• Python, C/C++, HTML/CSS/JS, SQL</p>
+            </div>
+
+            <div class="skill-header" onclick="toggleSkill(4)">O.S.</div>
+            <div id="skill-content-4" class="skill-content">
+                <p>• Windows, Ubuntu, Kali</p>
+            </div>
+
+            <div class="skill-header" onclick="toggleSkill(5)">Cloud</div>
+            <div id="skill-content-5" class="skill-content">
+                <p>• AWS, Git, MongoDB </br> 
+                • MongoDB SI Associate
+                </p>
+            </div>
+
+            <div class="skill-header" onclick="toggleSkill(7)">Others</div>
+            <div id="skill-content-7" class="skill-content">
+                <p>• CCNA, CEH, MongoDB SI Associate, IOT from Coursera & NPTEL</br>
+                    • DRDO - Embedded Systems & LASER Technologies </br> 
+                    • Microwave & Antenna design - Maharaja Agrasen Institute of Technology</br>
+                
+                </p>
+            </div>
+
+            <div class="skill-header" onclick="toggleSkill(6)">Expertise & Insights</div>
+            <div id="skill-content-6" class="skill-content">
+                <p style="text-align: justify;"><b> • Proficient in Cisco and Aruba networking technologies: </b>Experience with Wireless LAN Controllers (WLCs), Access Points (APs), Mesh APs, Instant Access Points (IAPs), and Virtual Controllers (VCs).</br>
+                    <!-- <b> Cisco: </b> WLC’s (2500, 3500, 5508, 5520, 7510, 8540) | AP’s (2600, 2700, 2800 model series)</br> -->
+                    <!-- <b> Aruba: </b> WLC – 7005 | AP – 377 | IAP & VC (115, 315, 365, 515, 534, 535)</br> -->
+                    <b> • Skilled in troubleshooting and configuration: </b>Hands-on experience with routers, switches (HPE/Aruba, Cisco, Nexus), and firewalls, specializing in resolving network issues across multiple device types.</br>
+                    <b> • ITIL processes: </b>Proven ability in Incident Management, Change Management, and Service Management, including handling TAC cases and executing change and service tasks.</br>
+                    <b> • Leadership and training: </b>Managed shift operations, trained new team members, and served as the First Point of Contact (POC) for escalations. Developed and implemented various Standard Operating Procedures (SOPs).</br>
+                    <b> • Client and escalation management: </b>Managed escalation calls and client communications regularly. Experienced in handling high-priority tickets (P1/P2).</br>
+                    <b> • Strong knowledge of monitoring tools: </b>Expertise in using SolarWinds, SevOne, DataDog, My Xylatics for network monitoring and performance analysis.</br>
+                    <b> • Additional tools proficiency: </b>Skilled in using CPPM and DHCP (DDI Infoblox) for resolving common issues.</br>
+                
+                </p>
+            </div>
+
+        </div>
+
+        <div class="scroll-to-top" onclick="scrollToTop()"></div>
+    </section>
+
+    <!-- <footer class="copyright-footer">
+        © Shivam Kumar, 2022
+    </footer> -->
+
+    <script>
+        function toggleSkill(skillNumber) {
+            const skillContent = document.getElementById(`skill-content-${skillNumber}`);
+            skillContent.classList.toggle('show');
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const isDarkTheme = body.classList.contains('dark-theme');
+            if (isDarkTheme) {
+                body.classList.remove('dark-theme');
+                body.classList.add('bright-theme');
+                localStorage.setItem('theme', 'bright-theme');
+            } else {
+                body.classList.remove('bright-theme');
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark-theme');
+            }
+        }
+
+        function setTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+            } else {
+                // Default to dark theme if no theme is saved
+                document.body.classList.add('dark-theme');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        document.getElementById('home-tab').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Adjust the path if needed
+        });
+
+        setTheme();
+    </script>
+</body>
+</html>
